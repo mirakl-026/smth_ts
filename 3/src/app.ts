@@ -1,7 +1,7 @@
 class Department {
     private readonly id: string;
     public name: string;    // без модификатора - public
-    private employees: string[] = [];
+    protected employees: string[] = [];     // protected как private только даёт доступ наследникам
 
     constructor(id: string, n: string) {
         this.id = id;
@@ -33,14 +33,88 @@ class Department {
     }
 }
 
-const accountingDep = new Department("D1","Accounting");
-accountingDep.describe();
+class ITDepartment extends Department {
+    // поля, которые есть только у наследника
+    public admins: string[];
+
+    // пока не добавлен собственный конструктор, конструктор родителя вызывается автоматических с передачей параметров
+    // собственный конструктор:
+    constructor(id: string, admins: string[]) {
+        super(id, "ITControl");    // конструктор родителя
+
+        // this работает только после вызова super
+        this.admins = admins;
+    }
+}
+
+class AccountDepartment extends Department {
+    private reports: string[] = [];
+
+    private lastReport: string;
+
+    // геттер - свойство, для получения чего-то + логика получения
+    get justLastReport() {
+        if (this.lastReport)
+            return this.lastReport;
+        else
+            throw new Error("no last report.")
+    }
+
+    // сеттер
+    set justLastReport(value: string) {
+        if (!value)
+            throw new Error("please put valid text!");
+
+        this.addReport(value);
+    }
+
+    constructor(id: string) {
+        super(id, "AccountControl");
+        this.lastReport = this.reports[0]
+    }
+
+    // перегрузка метода из базового класса
+    addEmployee(employeeName: string) {
+        if (employeeName[0] === 'A') {
+            return;
+        }
+        this.employees.push(employeeName);  // и использования поля, базового класса за счёт модификатора protected
+    }
+
+    addReport(text: string) {
+        this.reports.push(text);
+        this.lastReport = text;
+    }
+
+    printReports() {
+        console.log(this.reports);
+    }
+}
+
+//const accountingDep = new Department("D1","Accounting");
+const itDep = new ITDepartment("D1", ["Bob", "Sam"]);
+itDep.describe();
 
 // const accDepCopy = { name: "faf", describe: accountingDep.describe }
 // accDepCopy.describe();
 
-accountingDep.addEmployee("Sam");
-accountingDep.addEmployee("Max");
-accountingDep.addEmployee("Anna");
+itDep.addEmployee("Sam");
+itDep.addEmployee("Max");
+itDep.addEmployee("Anna");
 
-accountingDep.printEmployeeInformation();
+itDep.printEmployeeInformation();
+
+console.log(itDep);
+
+const accDep = new AccountDepartment("A2");
+
+//console.log("last report:", accDep.justLastReport); // Exception
+accDep.addReport("TypeScript is good");
+accDep.addReport("But JavaScript is better!");
+console.log("last report:", accDep.justLastReport);
+accDep.justLastReport = "Next or Nest?";
+accDep.printReports();
+
+accDep.addEmployee("Alex");
+accDep.addEmployee("Kate");
+accDep.printEmployeeInformation();
