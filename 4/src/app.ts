@@ -203,3 +203,15 @@ const fetchedUserData = {
 // в JS сначала проверяют на наличие поля затем идут глубже:
 // if (fetchedUserData.job && fetchedUserData.job.title) - в TS так не прокатит, зато можно так:
 console.log(fetchedUserData?.job?.title);
+
+
+// проверка на null и undefined
+const userInput = "";
+
+// проблема в том, что допустим хотим не сохранять null или undefined - но falsy значения тоже попадают под false
+const storedData = userInput || "default";
+console.log("SD1:", storedData);    // default, хотя мы хотели увидеть пустую строку
+
+// тогда можно воспользоваться чисто TS проверкой на null и undefined
+const storedData2 = userInput ?? "default";
+console.log("SD2:", storedData2);   // всё правильно пустая строка, но не null или undefined
