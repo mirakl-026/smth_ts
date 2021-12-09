@@ -1,6 +1,7 @@
 "use strict";
 // intersection types
 // позволяют комбинировать разные типы
+var _a;
 const e1 = {
     name: "John",
     privileges: ["work", "not work"],
@@ -113,3 +114,16 @@ const res2 = add2(1, 2);
 res2.toPrecision(1); // работает с number , не работает с Combinable;
 const res3 = add2("1", "2");
 res3.split('a'); // работает со string , не работает с Combinable;
+// optional chain - опциональные цепочки вызовов
+const fetchedUserData = {
+    id: "u1",
+    name: "Bob",
+    job: {
+        title: "CEO",
+        description: "My own company"
+    }
+};
+// а вдруг полей не будет?
+// в JS сначала проверяют на наличие поля затем идут глубже:
+// if (fetchedUserData.job && fetchedUserData.job.title) - в TS так не прокатит, зато можно так:
+console.log((_a = fetchedUserData === null || fetchedUserData === void 0 ? void 0 : fetchedUserData.job) === null || _a === void 0 ? void 0 : _a.title);
