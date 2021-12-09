@@ -1,21 +1,10 @@
 "use strict";
+//class Department {
 class Department {
     constructor(id, n) {
         this.employees = []; // protected как private только даёт доступ наследникам
         this.id = id;
         this.name = n;
-    }
-    /*
-        Два поля и конструктор можно записать так:
-
-        constructor(private id: string, public name: string)
-
-        именно так и всё в 1 строку, TS поймёт интерпретирует это так - у класса есть 2 поля - публичное name
-        и приватное employees - и им, через конструктор задаются значения
-     */
-    //constructor(private id: string, public name: string){}
-    describe() {
-        console.log("Department:", this.name);
     }
     addEmployee(employeeName) {
         // validation
@@ -25,7 +14,12 @@ class Department {
         console.log(`Number of employees: ${this.employees.length}`);
         console.log(`Employees: ${this.employees}`);
     }
+    // статические поля и методы - с доступом напрямую через класс, без инстансциирования
+    static getEmployeeFrom() {
+        return "Employee: [name: , age: ,]";
+    }
 }
+Department.ClassInfo = "class: Department";
 class ITDepartment extends Department {
     // пока не добавлен собственный конструктор, конструктор родителя вызывается автоматических с передачей параметров
     // собственный конструктор:
@@ -33,6 +27,9 @@ class ITDepartment extends Department {
         super(id, "ITControl"); // конструктор родителя
         // this работает только после вызова super
         this.admins = admins;
+    }
+    describe() {
+        console.log("Describe from ITDepartment");
     }
 }
 class AccountDepartment extends Department {
@@ -68,6 +65,9 @@ class AccountDepartment extends Department {
     printReports() {
         console.log(this.reports);
     }
+    describe() {
+        console.log("Describe from AccountDepartment");
+    }
 }
 //const accountingDep = new Department("D1","Accounting");
 const itDep = new ITDepartment("D1", ["Bob", "Sam"]);
@@ -89,3 +89,7 @@ accDep.printReports();
 accDep.addEmployee("Alex");
 accDep.addEmployee("Kate");
 accDep.printEmployeeInformation();
+// работа со статическими полями и методами
+console.log(Department.getEmployeeFrom());
+console.log(Department.ClassInfo);
+accDep.describe();

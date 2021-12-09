@@ -1,4 +1,5 @@
-class Department {
+//class Department {
+abstract class Department {     // делаем класс абстрактным, чтобы завставить наследников реализовать метод describe
     private readonly id: string;
     public name: string;    // без модификатора - public
     protected employees: string[] = [];     // protected как private только даёт доступ наследникам
@@ -18,9 +19,7 @@ class Department {
      */
     //constructor(private id: string, public name: string){}
 
-    describe(this: Department) {
-        console.log("Department:", this.name);
-    }
+    abstract describe(this: Department): void;  // у бастрактных методов нет реализации и они обязаны указать возвращаемый тип
 
     addEmployee(employeeName: string) {
         // validation
@@ -31,6 +30,13 @@ class Department {
         console.log(`Number of employees: ${this.employees.length}`);
         console.log(`Employees: ${this.employees}`);
     }
+
+    // статические поля и методы - с доступом напрямую через класс, без инстансциирования
+    static getEmployeeFrom() {
+        return "Employee: [name: , age: ,]";
+    }
+
+    static ClassInfo : string = "class: Department";
 }
 
 class ITDepartment extends Department {
@@ -44,6 +50,10 @@ class ITDepartment extends Department {
 
         // this работает только после вызова super
         this.admins = admins;
+    }
+
+    describe(): void {
+        console.log("Describe from ITDepartment");
     }
 }
 
@@ -89,6 +99,10 @@ class AccountDepartment extends Department {
     printReports() {
         console.log(this.reports);
     }
+
+    describe(): void {
+        console.log("Describe from AccountDepartment");
+    }
 }
 
 //const accountingDep = new Department("D1","Accounting");
@@ -118,3 +132,9 @@ accDep.printReports();
 accDep.addEmployee("Alex");
 accDep.addEmployee("Kate");
 accDep.printEmployeeInformation();
+
+
+// работа со статическими полями и методами
+console.log(Department.getEmployeeFrom());
+console.log(Department.ClassInfo);
+accDep.describe();
