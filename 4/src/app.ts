@@ -152,3 +152,20 @@ const aNine = document.getElementById("9");
 if (aNine) {
     (aNine as HTMLAnchorElement).href = "https://duckduckgo.com";
 }
+
+// index properties
+// если хочется заложить кучу свойств в объект, для их обхода к примеру в for..in - то можно воспользоваться индексируемыми свойствами
+
+interface ErrorContainer {
+    [prop: string]: string  // это означает, что он у нас сколько-то свойств, фиг поймёт какого имени, но значение будет string, есть ограничения...
+}
+
+const errorBag: ErrorContainer = {
+    "email": "stupid email",
+    "name": "wrong name!"
+}
+
+console.log("errors:\n");
+for (const errorBagKey in errorBag) {
+    console.log(errorBagKey + "-" + errorBag[errorBagKey]);
+}

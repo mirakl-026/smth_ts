@@ -95,3 +95,11 @@ const aNine = document.getElementById("9");
 if (aNine) {
     aNine.href = "https://duckduckgo.com";
 }
+const errorBag = {
+    "email": "stupid email",
+    "name": "wrong name!"
+};
+console.log("errors:\n");
+for (const errorBagKey in errorBag) {
+    console.log(errorBagKey + "-" + errorBag[errorBagKey]);
+}
