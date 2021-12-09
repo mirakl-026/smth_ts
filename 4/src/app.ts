@@ -109,3 +109,26 @@ function useVehicle(v: Vehicle) {
 
 useVehicle(v1);
 useVehicle(v2);
+
+// discriminated unions
+// помогают сделать type guard в сложных ситуациях
+interface Bird {
+    type: "bird";
+    flyingSpeed: number;
+}
+
+interface Horse {
+    type: "horse";  // свойство с конкретным значением
+    runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal (animal: Animal) {
+    switch (animal.type) {
+        case "bird": console.log("moving with speed: " + animal.flyingSpeed); break;
+        case "horse": console.log("moving with speed: " + animal.runningSpeed); break;
+    }
+}
+
+moveAnimal({type:"bird", flyingSpeed:500});
