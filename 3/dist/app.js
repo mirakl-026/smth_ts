@@ -33,3 +33,13 @@ class SteamUser {
 let Nikita = new SteamUser("Nikita", 27);
 Nikita.currentGame = "Witcher 3";
 Nikita.play();
+let add;
+add = (num1, num2) => {
+    return num1 + num2;
+};
+console.log("type:", add(3, 4));
+let add2;
+add2 = (num1, num2) => {
+    return num1 + num2;
+};
+console.log("interface:", add2(3, 4));

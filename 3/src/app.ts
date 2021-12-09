@@ -68,3 +68,33 @@ interface Named {
 interface Greetable extends Named {
     greet() : void;
 }
+
+
+// интерфейсы как типы функций
+// пример через type
+type Addfn = (a: number, b: number) => number;
+
+let add : Addfn;
+add = (num1: number, num2: number) => {
+    return num1 + num2;
+}
+console.log("type:", add(3,4));
+
+// пример через интерфейс и анонимную функцию
+interface IAddFunc {
+    (a: number, b: number) : number;    // анонимная функция (без имени)
+}
+
+let add2 : IAddFunc;
+add2 = (num1: number, num2: number) => {
+    return num1 + num2;
+}
+console.log("interface:", add2(3,4));
+
+// опциональные свойства и методы помечаются через ?
+interface IOptioanl {
+    optionalProperty1?: string;
+
+    optionalMethod1?() : void;
+}
+
