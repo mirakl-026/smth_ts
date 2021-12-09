@@ -1,13 +1,10 @@
+"use strict";
 class Department {
-    private readonly id: string;
-    public name: string;    // без модификатора - public
-    private employees: string[] = [];
-
-    constructor(id: string, n: string) {
-        this.id = id;
-        this.name = n;
-    }
-
+    //
+    // constructor(id: string, n: string) {
+    //     this.id = id;
+    //     this.name = n;
+    // }
     /*
         Два поля и конструктор можно записать так:
 
@@ -16,31 +13,30 @@ class Department {
         именно так и всё в 1 строку, TS поймёт интерпретирует это так - у класса есть 2 поля - публичное name
         и приватное employees - и им, через конструктор задаются значения
      */
-    //constructor(private id: string, public name: string){}
-
-    describe(this: Department) {
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
+        // private id: string;
+        // public name: string;    // без модификатора - public
+        this.employees = [];
+    }
+    describe() {
         console.log("Department:", this.name);
     }
-
-    addEmployee(employeeName: string) {
+    addEmployee(employeeName) {
         // validation
         this.employees.push(employeeName);
     }
-
     printEmployeeInformation() {
         console.log(`Number of employees: ${this.employees.length}`);
         console.log(`Employees: ${this.employees}`);
     }
 }
-
-const accountingDep = new Department("D1","Accounting");
+const accountingDep = new Department("D1", "Accounting");
 accountingDep.describe();
-
 // const accDepCopy = { name: "faf", describe: accountingDep.describe }
 // accDepCopy.describe();
-
 accountingDep.addEmployee("Sam");
 accountingDep.addEmployee("Max");
 accountingDep.addEmployee("Anna");
-
 accountingDep.printEmployeeInformation();
