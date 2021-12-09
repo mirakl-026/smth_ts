@@ -132,3 +132,23 @@ function moveAnimal (animal: Animal) {
 }
 
 moveAnimal({type:"bird", flyingSpeed:500});
+
+
+// type casting
+// явно указать TS , что этот тип это ЭТОТ тип!
+
+// получим DOM элемент
+const paragraph = document.querySelector("p");  // тут TS понимает что это HTMLParagraph или null
+const aSix = <HTMLAnchorElement>document.getElementById("6")!;    // а вот тут он лишь думает, что это HTMLElement или null, тогда указываем ему <что за элемент> и ! - что точно не null
+aSix.href = "https://google.com";
+
+// если это внутри реакта (JSX, TSX) - там нельзя лишний раз использовать <> , поэтому альтернативой будет:
+const aSeven = document.getElementById("7")! as HTMLAnchorElement;
+aSeven.href = "https://bing.com";
+
+// либо так
+const aNine = document.getElementById("9");
+
+if (aNine) {
+    (aNine as HTMLAnchorElement).href = "https://duckduckgo.com";
+}
