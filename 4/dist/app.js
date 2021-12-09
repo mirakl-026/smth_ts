@@ -103,3 +103,13 @@ console.log("errors:\n");
 for (const errorBagKey in errorBag) {
     console.log(errorBagKey + "-" + errorBag[errorBagKey]);
 }
+function add2(n1, n2) {
+    if (typeof n1 === "string" || typeof n2 === "string") {
+        return n1.toString() + n2.toString();
+    }
+    return n1 + n2;
+}
+const res2 = add2(1, 2);
+res2.toPrecision(1); // работает с number , не работает с Combinable;
+const res3 = add2("1", "2");
+res3.split('a'); // работает со string , не работает с Combinable;

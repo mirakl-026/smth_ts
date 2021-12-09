@@ -169,3 +169,22 @@ console.log("errors:\n");
 for (const errorBagKey in errorBag) {
     console.log(errorBagKey + "-" + errorBag[errorBagKey]);
 }
+
+// перегрузка функций
+// проблема, что функция вовзращает Combinable, а лучше бы что-то конкретное, поэтому
+
+function add2(n1: number, n2: number):number    // можно с разным кол-вом аргументов, но тогда тело функции должно быть готовым
+function add2(n1: string, n2: number):string
+function add2(n1: number, n2: string):string
+function add2(n1: string, n2: string):string
+function add2(n1: Combinable, n2: Combinable) {
+    if (typeof n1 === "string" || typeof n2 === "string") {
+        return n1.toString() + n2.toString();
+    }
+    return n1 + n2;
+}
+
+const res2 = add2(1,2);
+res2.toPrecision(1);   // работает с number , не работает с Combinable;
+const res3 = add2("1","2");
+res3.split('a');    // работает со string , не работает с Combinable;
