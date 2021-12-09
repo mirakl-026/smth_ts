@@ -138,3 +138,34 @@ accDep.printEmployeeInformation();
 console.log(Department.getEmployeeFrom());
 console.log(Department.ClassInfo);
 accDep.describe();
+
+// пример реализации синглтона
+class HQDepartment extends Department {
+
+    static instance: HQDepartment;
+
+    // получение синглтона
+    static getInstance () {
+        if (HQDepartment.instance)
+            return HQDepartment.instance;
+        else {
+            HQDepartment.instance = new HQDepartment("HQ1");
+            return HQDepartment.instance;
+        }
+    }
+
+    // для синглтона - конструктор приватный
+    private constructor(id: string) {
+        super(id, "HQ");
+    }
+
+    describe(): void {
+        console.log("Describe from HQ");
+    }
+}
+
+// получение синглтона
+const hq1 = HQDepartment.getInstance();
+const hq2 = HQDepartment.getInstance();
+console.log(hq1);
+console.log(hq2);
