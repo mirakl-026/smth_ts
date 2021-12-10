@@ -1,27 +1,21 @@
-// декораторы - мета-функции
-
-// обычно декораторы это функции, называемые с большой буквы, и имеющие разное кол-во параметров в зависимости от их использования
+// странный декоратор
 
 // декоратор (через фабрику
-function Logger (logMessage: string) {
-    return function (c: Function) {
-        console.log(logMessage);
-        console.log(c);
+function WithTemplate (html: string, elemId: string) {
+    return function (_: Function) {     // _ указывает TS, что мы не будем это использовать, но обязаны указать
+        const elem = document.getElementById(elemId);
+        if (elem) {
+            elem.innerHTML = html;
+        }
     }
 }
 
-@Logger("Logging-Person")
-class Person {
-    name = "Max";
+@WithTemplate("<h2>Decorator_PersonTemplate</h2>", "app")
+class PersonTemplate {
+    name : string;
 
-    constructor() {
-        console.log("creating Person object...")
+    constructor(name: string) {
+        this.name = name;
     }
 }
 
-const person1 = new Person();
-console.log(person1);
-
-// декораторы выполняются когда класс определён, а не когда происходит создание объекта
-const person2 = new Person();
-console.log(person2);
