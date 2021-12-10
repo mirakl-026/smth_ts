@@ -2,13 +2,15 @@
 
 // обычно декораторы это функции, называемые с большой буквы, и имеющие разное кол-во параметров в зависимости от их использования
 
-// декоратор
-function Logger (constructor: Function) {
-    console.log("logging...");
-    console.log(constructor);
+// декоратор (через фабрику
+function Logger (logMessage: string) {
+    return function (c: Function) {
+        console.log(logMessage);
+        console.log(c);
+    }
 }
 
-@Logger
+@Logger("Logging-Person")
 class Person {
     name = "Max";
 

@@ -7,10 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 // обычно декораторы это функции, называемые с большой буквы, и имеющие разное кол-во параметров в зависимости от их использования
-// декоратор
-function Logger(constructor) {
-    console.log("logging...");
-    console.log(constructor);
+// декоратор (через фабрику
+function Logger(logMessage) {
+    return function (c) {
+        console.log(logMessage);
+        console.log(c);
+    };
 }
 let Person = class Person {
     constructor() {
@@ -19,7 +21,7 @@ let Person = class Person {
     }
 };
 Person = __decorate([
-    Logger
+    Logger("Logging-Person")
 ], Person);
 const person1 = new Person();
 console.log(person1);
