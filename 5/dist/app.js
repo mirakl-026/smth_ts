@@ -25,3 +25,16 @@ const weirdDb = new DataStorage();
 weirdDb.addItem(true);
 weirdDb.addItem(7);
 console.log(weirdDb.getItems());
+// допустим есть функция создающая объект CourseGoal:
+function createCourseGoal(title, description, date) {
+    let result = {}; // иначе будет жаловаться на то, что у {} нет полей title и т.д.
+    result.title = title;
+    result.description = description;
+    result.completeUntil = date;
+    return result; // т.к. Partial
+}
+console.log(createCourseGoal("TS", "dushnilovo", new Date()));
+// другой встроенный дженерик - Readonly
+const names = ["Max", "Anna"];
+//names.push("Bob");  // не может
+console.log(names);
