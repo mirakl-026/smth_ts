@@ -8,11 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 // декоратор (через фабрику
 function WithTemplate(html, elemId) {
+    console.log("template decorator");
     return function (_) {
         const elem = document.getElementById(elemId);
         if (elem) {
             elem.innerHTML = html;
         }
+    };
+}
+function Logger2(logMessage) {
+    return function (_) {
+        console.log(logMessage);
     };
 }
 let PersonTemplate = class PersonTemplate {
@@ -21,5 +27,6 @@ let PersonTemplate = class PersonTemplate {
     }
 };
 PersonTemplate = __decorate([
-    WithTemplate("<h2>Decorator_PersonTemplate</h2>", "app")
+    Logger2("logging decorator: logger2"),
+    WithTemplate("<h2>Decorator_PersonTemplate</h2>", "app") // декораторы вызываются снизу вверх - сначала WithTemplate, потом Logger
 ], PersonTemplate);
