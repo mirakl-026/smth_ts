@@ -26,4 +26,11 @@ console.log(mergedObject3);
 const mergedObject4 = merge2({name:"Nikita"}, 30);
 console.log(mergedObject4); // {name:"Nikita"} - и все молчат об ошибке, т.к. Object.assign работает только с объекта, JS пофиг, а не указав ограничений на T и U - получается any и TS не жалуется
 
-// тогда
+// тогда придумали констрейнты - constraints - требования к обобщённым типам:
+function merge3<T extends object, U extends object>(objA: T, objB: U) {   // return T & U - intersection type
+    return Object.assign(objA, objB);
+}
+
+//const mergedObject5 = merge3({name:"Nikita"}, 30);  // теперь TS бесится, что 30 это не объект
+const mergedObject5 = merge3({name:"Nikita"}, {age:30});
+console.log(mergedObject5);
