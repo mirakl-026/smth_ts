@@ -27,3 +27,15 @@ function merge3(objA, objB) {
 //const mergedObject5 = merge3({name:"Nikita"}, 30);  // теперь TS бесится, что 30 это не объект
 const mergedObject5 = merge3({ name: "Nikita" }, { age: 30 });
 console.log(mergedObject5);
+function countAndDescribe(element) {
+    let description = "Got no value";
+    if (element.length === 1) {
+        description = "Got 1 value";
+    }
+    else if (element.length > 1) {
+        description = "Got " + element.length + " values";
+    }
+    return [element, description];
+}
+console.log(countAndDescribe("Hello there!"));
+console.log(countAndDescribe([1, 2, 3, 4]));
