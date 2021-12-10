@@ -52,3 +52,15 @@ function countAndDescribe<T extends IHaveLength>(element: T) : [T, string] {
 
 console.log(countAndDescribe("Hello there!"));
 console.log(countAndDescribe([1,2,3,4]));
+
+// keyof
+// допустим есть функция вычленяющая значения свойства из объекта:
+// function extractAndConvert(obj, key) {   // так бы это выглядело в JS (и всё бы работало) - но TS не уверен - может ли key быть свойством obj, тогда:
+//     return obj[key];
+// }
+
+function extractAndConvert<T extends object, U extends keyof T> (obj: T, key: U) {
+    return obj[key];
+}
+
+console.log(extractAndConvert({hint:"kek"}, "hint"));   // kek
