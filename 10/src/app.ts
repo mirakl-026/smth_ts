@@ -1,3 +1,5 @@
+// пример приложения drag&drop
+
 // Drag & Drop Interfaces
 interface Draggable {
   dragStartHandler(event: DragEvent): void;
