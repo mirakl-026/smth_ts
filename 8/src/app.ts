@@ -1,3 +1,5 @@
+// автобиндинг через декораторы
+
 function Logger(logString: string) {
   console.log('LOGGER FACTORY');
   return function(constructor: Function) {
