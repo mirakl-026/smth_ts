@@ -2,6 +2,8 @@ import 'reflect-metadata';
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
 
+// class-validator
+
 import { Product } from './product.model';
 
 const products = [
