@@ -1,3 +1,5 @@
+// декораторы вне классов
+
 function Logger(logString: string) {
   console.log('LOGGER FACTORY');
   return function(constructor: Function) {
