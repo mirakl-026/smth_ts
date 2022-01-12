@@ -1,5 +1,7 @@
 import axios from "axios";
 
+// пример приложения с Google-Map
+
 const form = document.querySelector("form")!;
 const addressInput = document.getElementById("address")! as HTMLInputElement;
 
@@ -18,9 +20,7 @@ function searchAddressHandler(event: Event) {
 
   axios
     .get<GoogleGeocodingResponse>(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(
-        enteredAddress
-      )}&key=${GOOGLE_API_KEY}`
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(enteredAddress)}&key=${GOOGLE_API_KEY}`
     )
     .then(response => {
       if (response.data.status !== "OK") {
