@@ -3,6 +3,8 @@ import { json } from 'body-parser';
 
 import todoRoutes from './routes/todos';
 
+// пример node + express + TS
+
 const app = express();
 
 app.use(json());
