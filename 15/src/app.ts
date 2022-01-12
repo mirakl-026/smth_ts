@@ -1,6 +1,8 @@
 import 'reflect-metadata';
 import { plainToClass } from 'class-transformer';
 
+// class-transformer
+
 import { Product } from './product.model';
 
 const products = [
