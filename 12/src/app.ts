@@ -1,3 +1,5 @@
+// пример с использованием WebPack
+
 import { ProjectInput } from './components/project-input';
 import { ProjectList } from './components/project-list';
 
