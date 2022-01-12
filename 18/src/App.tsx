@@ -5,6 +5,8 @@ import TodoList from './components/TodoList';
 import NewTodo from './components/NewTodo';
 import { Todo } from './todo.model';
 
+// пример реакта - создаётся через create-react-app
+
 const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
